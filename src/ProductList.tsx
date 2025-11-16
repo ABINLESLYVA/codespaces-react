@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProductList.css";
 
-import { AppDispatch } from "./store/retailStore";
-import { useDispatch } from "react-redux";
-import { addItem } from "./store/slice";
+import { AppDispatch, RootState } from "./store/retailStore";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "./store/Cart/slice";
+import { getProductsAsync } from "./store/Products/slice";
 
 
 const ProductList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const products = [
-    { id: 1, name: "Product 1", price: 10.0 },
-    { id: 2, name: "Product 2", price: 20.0 },
-    { id: 3, name: "Product 3", price: 30.0 },
-  ];
+  const products = useSelector((state: RootState) => state.products.products);
+  const isLoading = useSelector((state: RootState) => state.products.isLoading);
+  
+  useEffect(() => {
+    dispatch(getProductsAsync());
+  }, []);
 
   return (
     <div className="product-list">
       <h2>Products</h2>
+      {isLoading && <div>Loading products...</div>}
       <ul>
         {products.map(product => (
           <li key={product.id} className="product-item">
