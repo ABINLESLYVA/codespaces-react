@@ -45,3 +45,7 @@
 .checkout-btn:hover {
   background: #1e7e34;
 }
+
+.cart-delete {
+  cursor: pointer;
+}

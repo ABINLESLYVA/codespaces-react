@@ -25,7 +25,7 @@ const ProductList: React.FC = () => {
           <li key={product.id} className="product-item">
             <div className="product-name">{product.name}</div>
             <div className="product-price">${product.price.toFixed(2)}</div>
-            <button className="add-to-cart" onClick={() => dispatch(addItem(product.name))}>Add to Cart</button>
+            <button className="add-to-cart" onClick={() => dispatch(addItem(product))}>Add to Cart</button>
           </li>
         ))}
       </ul>
